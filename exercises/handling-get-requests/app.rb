@@ -94,3 +94,9 @@ get "/" do
   @quotes = []
   erb :home
 end
+
+get "/search" do
+  search(params["terms"])
+end
+
+end
