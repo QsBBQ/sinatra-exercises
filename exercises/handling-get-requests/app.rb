@@ -96,5 +96,6 @@ get "/" do
 end
 
 get "/search" do
-  search(params["terms"])
+  @search = params[:terms]
+  search(@search)
 end
