@@ -98,5 +98,3 @@ end
 get "/search" do
   search(params["terms"])
 end
-
-end
