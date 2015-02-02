@@ -97,7 +97,11 @@ end
 
 get "/search" do
   @quotes = search(params[:terms])
-  p params
   erb :home
+end
+
+get "/authors/:author" do
+  @author = 
+
 end
 
