@@ -96,8 +96,8 @@ get "/" do
 end
 
 get "/search" do
-  terms_search = params[:terms]
-  @quotes = search(terms_search)
+  @quotes = search(params[:terms])
+  p params
   erb :home
 end
 
