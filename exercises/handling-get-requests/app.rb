@@ -97,7 +97,7 @@ end
 
 get "/search" do
   terms_search = params[:terms]
-  test = search(terms_search)
-  #terms_search
+  @quotes = search(terms_search)
+  redirect "/"
 end
 
