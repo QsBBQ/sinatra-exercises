@@ -98,6 +98,6 @@ end
 get "/search" do
   terms_search = params[:terms]
   @quotes = search(terms_search)
-  redirect "/"
+  erb :home
 end
 
