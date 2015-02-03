@@ -12,18 +12,18 @@
 <h3>Search!</h3>
 <p>Wow look a form for search!</p>
 
-<form action="/search" method = "get">
-  <input type = "text" name = "terms" /> <br />
-  <input type= "submit" />
+<form action="/search" method="get">
+  <input type="text" name="terms" /> <br />
+  <input type="submit" />
 </form>
 
 <h5>Cool Searches</h5>
 <p>Wish there was a list of recommended searches...</p>
 
 <ul>
-  <li><a href="http://localhost:9292/search?terms=smart">Cool search for "smart"</a></li>
-  <li><a href="http://localhost:9292/search?terms=man">Cool search for "man"</a></li>
-  <li><a href="http://localhost:9292/search?terms=computers">Cool search for  "computers"</a></li>
+  <li><a href="/search?terms=smart">Cool search for "smart"</a></li>
+  <li><a href="/search?terms=man">Cool search for "man"</a></li>
+  <li><a href="/search?terms=computers">Cool search for  "computers"</a></li>
 </ul>
 
 <h3>Authors!</h3>
@@ -31,5 +31,7 @@
 
 
 <ul>
-  <li><a href="http://localhost:9292/authors/Ken%20Thompson">Ken Thompson</a></li>
+  <% @authors.each do |author| %>
+    <li><a href="/authors/<%=author%>"><%=author%></a></li>
+  <% end %>
 </ul>
