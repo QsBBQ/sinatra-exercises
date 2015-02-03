@@ -86,7 +86,7 @@ end
 
 def quotes_by(author)
   QUOTES.select do |quote|
-    comparable_author(quotes[:author]) == comparable_author(author)
+    comparable_author(quote[:author]) == comparable_author(author)
   end
 end
 
@@ -101,7 +101,6 @@ get "/search" do
 end
 
 get "/authors/:author" do
-  @author = 
-
+  quotes_by(params[:author])
 end
 
