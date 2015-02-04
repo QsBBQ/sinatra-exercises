@@ -90,16 +90,18 @@ def quotes_by(author)
   end
 end
 
-authors = []
-def authors
-  QUOTES.each do |item|
-    authors.push(item[:author])
+
+def get_authors(quotes)
+  results = []
+  quotes.each do |quote|
+    results.push(quote[:author])
   end
+  results
 end
 
 get "/" do
   @quotes = []
-  @authors = authors
+  @authors = get_authors(QUOTES)
   erb :home
 end
 
