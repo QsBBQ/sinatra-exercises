@@ -17,3 +17,9 @@ get '/recipes/:recipe_id' do
   end
 end
 
+post '/recipes' do
+  "Here is the recipe #{params[:recipe]}"
+  @recipe = Recipe.new
+  @recipe.title = params[:recipe]
+end
+
