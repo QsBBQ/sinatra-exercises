@@ -68,9 +68,9 @@ end
 
 def comparable_author(author)
   decoded_author = URI.unescape(author)
-  case_insensitive_author = decoded_author
-  author_with_spaces_replaced = author.gsub(" ", "-")
-  author_with_non_alpha_chars_stripped = author.gsub(/[^a-z-]/, "")
+  case_insensitive_author = decoded_author.downcase
+  author_with_spaces_replaced = case_insensitive_author.gsub(" ", "-")
+  author_with_non_alpha_chars_stripped = author_with_spaces_replaced.gsub(/[^a-z-]/, "")
 
   author_with_non_alpha_chars_stripped
 end
@@ -86,11 +86,32 @@ end
 
 def quotes_by(author)
   QUOTES.select do |quote|
-    comparable_author(quotes[:author]) == comparable_author(author)
+    comparable_author(quote[:author]) == comparable_author(author)
   end
+end
+
+
+def get_authors(quotes)
+  results = []
+  quotes.each do |quote|
+    results.push(quote[:author])
+  end
+  results
 end
 
 get "/" do
   @quotes = []
+  @authors = get_authors(QUOTES)
   erb :home
 end
+
+get "/search" do
+  @quotes = search(params[:terms])
+  erb :home
+end
+
+get "/authors/:author" do
+  @quotes = quotes_by(params[:author])
+  erb :home
+end
+
