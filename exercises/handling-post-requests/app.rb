@@ -20,6 +20,7 @@ end
 post '/recipes' do
   "Here is the recipe #{params[:recipe]}"
   @recipe = Recipe.new
-  @recipe.title = params[:recipe]
+  @recipe.attributes = (:id => 1, created_by => "Frank", :title => "Test title", :description => "test", :instructions => "instruct me", :created_at => Time.now)
+  @recipe.save
 end
 
