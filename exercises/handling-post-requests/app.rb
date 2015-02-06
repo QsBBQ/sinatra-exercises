@@ -18,15 +18,12 @@ get '/recipes/:recipe_id' do
 end
 
 post '/recipes' do
-  "Here is the recipe #{params[:recipe]}"
-  @recipe = Recipe.new
-  @recipe.create({
-                  :created_by => "Frank",
-                  :title => "Test title",
-                  :description => "test",
-                  :instructions => "instruct me",
+  #params.inspect
+  @grub.create({
+                  :created_by => params[:created_by],
+                  :title => params[:title],
+                  :description => params[:description],
+                  :instructions => params[:instructions]
                 })
-  @recipe.save
-  erb :recipes
 end
 
