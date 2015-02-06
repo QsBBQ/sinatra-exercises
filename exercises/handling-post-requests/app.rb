@@ -19,11 +19,12 @@ end
 
 post '/recipes' do
   #params.inspect
-  @grub.create({
+  recipe.create({
                   :created_by => params[:created_by],
                   :title => params[:title],
                   :description => params[:description],
                   :instructions => params[:instructions]
                 })
+  redirect("/")
 end
 
