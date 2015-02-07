@@ -49,13 +49,6 @@ post '/recipes/<%=@recipe.id%>' do
 end
 
 post '/recipes' do
-  #randomly got it working by just guessing :)
-  #randomly guessing and searching
-  #Or the session last night was great I think I finally connected the dots with great teaching and examples!
-  #The code feedback and sessions have been great and the most valuable for me. Slack is mixed in my opinion and have been more causes for confusion for me.
-  #But probably because when I get stuck I have a hard time articulating. I hope to get better at this.
-  #Overall Love the course so far.
-
   #params.inspect This is just for a reminder for me.
 
   #Ok option 1 on the Recipe class built for datamapper use the create class method which is a an alias for .new and .save
