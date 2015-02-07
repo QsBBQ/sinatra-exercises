@@ -1,4 +1,13 @@
 <h1>Granny Goodnesses Greatest Recipes</h1>
+
+<% if @success %>
+  <p> <%= @success %></p>
+<% end %>
+
+<% if @error %>
+  <p> <%= @error %> </p>
+<% end %>
+
 <% @recipes.each do |recipe| %>
   <article>
     <h3><a href="/recipes/<%=recipe.id%>"><%= recipe.title %></a></h3>
@@ -7,7 +16,7 @@
 <% end %>
 
 <h2>Add Your Own!</h2>
-<p>Oh wait, there isn't a form here...</p>
+<p>Oh wait, the great recipe book!</p>
 <form action="recipes" method="post">
   <strong>Created by</strong> <br />
   <input type="text" name="created_by" /> <br />
@@ -17,5 +26,5 @@
   <input type="text" name="description" /> <br />
   <strong>Instructions</strong> <br />
   <input type="text" name="instructions" /> <br />
-  <input type="submit" value="Submit"/> <br />
+  <input type="submit" value="Submit Recipe"/> <br />
 </form>
