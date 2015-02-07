@@ -26,6 +26,18 @@ get '/recipes/:recipe_id' do
   end
 end
 
+post '/recipes/:recipe_id' do
+  #params.inspect
+  recipe = Recipe.find(params[:id])
+  recipe.update({
+                   :created_by => params[:created_by],
+                   :title => params[:title],
+                   :description => params[:description],
+                   :instructions => params[:instructions]
+                 })
+  redirect "/"
+end
+
 get '/recipes/:recipe_id/edit' do
   @recipe = Recipe.get(params[:recipe_id])
 
@@ -33,14 +45,7 @@ get '/recipes/:recipe_id/edit' do
 end
 
 post '/recipes/<%=@recipe.id%>' do
-
-  Recipe.update({
-                  :created_by => params[:created_by],
-                  :title => params[:title],
-                  :description => params[:description],
-                  :instructions => params[:instructions]
-                })
-  redirect "/"
+  #Lots of guessing not sure why this was needed?
 end
 
 post '/recipes' do
