@@ -1,18 +1,26 @@
 require 'sinatra'
 
-require 'sinatra/flash'
 require_relative 'db'
 
-# require 'rack-flash'
-# require 'sinatra/redirect_with_flash'
 
-#need to understand what this does.
-enable :sessions
-#use Rack::Flash, :sweep => true
 
 get '/' do
   @recipes = Recipe.all
   erb :recipes
+end
+
+post '/recipes' do
+  #params.inspect This is just for a reminder for me.
+
+  recipe = Recipe.new
+  recipe.attributes = ({
+                  :created_by => params[:created_by],
+                  :title => params[:title],
+                  :description => params[:description],
+                  :instructions => params[:instructions]
+                })
+  recipe.save
+  redirect("/")
 end
 
 get '/recipes/:recipe_id' do
@@ -26,65 +34,30 @@ get '/recipes/:recipe_id' do
   end
 end
 
-post '/recipes/:recipe_id' do
-  #params.inspect
-  recipe = Recipe.find(params[:id])
-  recipe.update({
-                   :created_by => params[:created_by],
-                   :title => params[:title],
-                   :description => params[:description],
-                   :instructions => params[:instructions]
-                 })
-  redirect "/"
-end
-
 get '/recipes/:recipe_id/edit' do
-  @recipe = Recipe.get(params[:recipe_id])
-
+  id = params[:recipe_id]
+  @recipe = Recipe.get(id)
   erb :edit_recipe
 end
 
-post '/recipes/<%=@recipe.id%>' do
-  #Lots of guessing not sure why this was needed?
+post "/recipes/:recipe_id/update" do
+  id = params[:recipe_id]
+  #
+  recipe = Recipe.get(id)
+  #
+  recipe.created_by = params[:created_by]
+  recipe.title = params[:title]
+  recipe.description = params[:description]
+  recipe.instructions = params[:instructions]
+
+  recipe.save
+  redirect "/recipes/#{id}"
 end
 
-post '/recipes' do
-  #params.inspect This is just for a reminder for me.
+post '/recipes/:recipe_id/destroy' do
+  id = params[:recipe_id]
+  recipe = Recipe.get(id)
+  recipe.destroy
 
-  #Ok option 1 on the Recipe class built for datamapper use the create class method which is a an alias for .new and .save
-  # Recipe.create({
-  #                 :created_by => params[:created_by],
-  #                 :title => params[:title],
-  #                 :description => params[:description],
-  #                 :instructions => params[:instructions]
-  #               })
-  #or option 2 with the Recipe class use the methods .new and .save
-  # recipe = Recipe.new({
-  #                 :created_by => params[:created_by],
-  #                 :title => params[:title],
-  #                 :description => params[:description],
-  #                 :instructions => params[:instructions]
-  #               })
-  # recipe.save
-
-  #option 3 using a attributes and added flash messages.
-  recipe = Recipe.new
-  #I still need to follow up on what magic makes the create time or if this is just built into data mapper.
-  recipe.attributes = ({
-                  :created_by => params[:created_by],
-                  :title => params[:title],
-                  :description => params[:description],
-                  :instructions => params[:instructions]
-                })
-  #Tried to add some save messages tried a couple ways without success.
-  if recipe.save
-    @success = 'Recipe saved successfully! Enjoy your meal!'
-    puts @success
-    redirect '/'
-  else
-    @error = 'Failed to save! Turn off the oven.'
-    redirect '/'
-  end
-  redirect("/")
+  redirect "/"
 end
-
