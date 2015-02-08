@@ -1,0 +1,17 @@
+<h1> Edit Recipe </h1>
+
+<form action="/recipes/<%= @recipe.id %>/update" method="post">
+  <strong>Created by</strong> <br />
+  <input type="hidden"/><br />
+  <textarea name = "created_by"><%= @recipe.created_by %></textarea> <br />
+  <strong>Title</strong> <br />
+  <input type="hidden"/> <br />
+  <textarea name ="title"><%= @recipe.title %> </textarea> <br />
+  <strong>Description</strong> <br />
+  <input type="hidden"/> <br />
+  <textarea name ="description"><%= @recipe.description %></textarea> <br />
+  <strong>Instructions</strong> <br />
+  <input type="hidden"/> <br />
+  <textarea name ="instructions"><%= @recipe.instructions %></textarea> <br />
+  <input type="submit" value="Update"/> <br />
+</form>

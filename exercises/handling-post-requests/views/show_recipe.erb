@@ -2,3 +2,12 @@
 <p class="description"><%=@recipe.description%></p>
 
 <p><%= @recipe.instructions %></p>
+
+
+<form action="/recipes/<%= @recipe.id %>/edit" method= "get">
+  <button type="submit" class="btn btn-primary" name="edit"> edit</button>
+</form>
+
+<form action="/recipes/<%= @recipe.id %>/destroy" method= "post">
+  <button type="submit" class="btn btn-danger" name="delete"> Delete</button>
+</form>

@@ -30,6 +30,8 @@ DataMapper.auto_upgrade!
 get("/tweets/new") do
   # build a 'shell' Tweet object that can be sent to the browser
   # render the :new template
+  @tweet = Tweet.new
+  erb :new
 end
 
 # CRUD Verb: Create
